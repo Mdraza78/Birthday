@@ -319,6 +319,25 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
   box-shadow: var(--shadow-soft);
   background: #000;
 }
+.video-empty {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 1rem;
+  border: 2px dashed rgba(244, 200, 209, .4);
+  background: rgba(72, 24, 42, .35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+.video-empty-icon { font-size: 2.5rem; }
+.video-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 
 /* ===== Letter ===== */
 .letter-screen { gap: 2rem; }

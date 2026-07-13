@@ -21,7 +21,6 @@ const GIFTS = [
 
 const PHOTO = "Img/flower.jpg";
 
-const VIDEO_SRC = "Img/birthday-video.mp4";
 const VIDEO_CAPTION = "a little moment, just for you 🎬";
 
 /* ===== Router-ish ===== */
@@ -199,11 +198,32 @@ function renderMemories() {
 /* ===== Video ===== */
 function renderVideo() {
   const node = tpl("tpl-video");
-  const video = $(node, "video");
-  video.querySelector("source").src = VIDEO_SRC;
-  video.load();
   $(node, "caption").textContent = VIDEO_CAPTION;
-  $(node, "next").addEventListener("click", () => go("letter"));
+
+  const video = $(node, "video");
+  const source = $(node, "source");
+  const empty = $(node, "empty");
+  const fileInput = $(node, "file-input");
+  let objectUrl = null;
+
+  fileInput.addEventListener("change", (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
+    objectUrl = URL.createObjectURL(file);
+
+    source.src = objectUrl;
+    video.load();
+    video.hidden = false;
+    empty.hidden = true;
+    video.play().catch(() => {});
+  });
+
+  $(node, "next").addEventListener("click", () => {
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
+    go("letter");
+  });
   app.appendChild(node);
 }
 
