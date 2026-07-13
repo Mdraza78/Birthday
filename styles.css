@@ -319,24 +319,59 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
   box-shadow: var(--shadow-soft);
   background: #000;
 }
-.video-empty {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 1rem;
-  border: 2px dashed rgba(244, 200, 209, .4);
-  background: rgba(72, 24, 42, .35);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-}
-.video-empty-icon { font-size: 2.5rem; }
 .video-upload-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+/* Animated love scene (default, always works, no external file needed) */
+.love-animation {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: linear-gradient(160deg, rgba(217, 74, 107, .35), rgba(72, 24, 42, .75));
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.love-scene {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+.love-penguin { width: 6rem; }
+@media (min-width: 480px) { .love-penguin { width: 7.5rem; } }
+.love-big-heart {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+.love-sparkle {
+  position: absolute;
+  font-size: 1.4rem;
+  color: var(--gold);
+  z-index: 1;
+}
+.love-sparkle-a { top: 12%; left: 10%; }
+.love-sparkle-b { top: 18%; right: 12%; }
+.love-sparkle-c { bottom: 16%; left: 16%; }
+.love-hearts-rise {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.rising-heart {
+  position: absolute;
+  bottom: 12%;
+  font-size: 1.4rem;
+  animation: heart-float 3.2s ease-out forwards;
 }
 
 /* ===== Letter ===== */

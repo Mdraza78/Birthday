@@ -196,15 +196,29 @@ function renderMemories() {
 }
 
 /* ===== Video ===== */
+const LOVE_HEART_EMOJIS = ["💗", "💕", "💖", "💓", "♡"];
+
 function renderVideo() {
   const node = tpl("tpl-video");
   $(node, "caption").textContent = VIDEO_CAPTION;
 
+  const animation = $(node, "animation");
+  const risingHearts = $(node, "rising-hearts");
   const video = $(node, "video");
   const source = $(node, "source");
-  const empty = $(node, "empty");
   const fileInput = $(node, "file-input");
   let objectUrl = null;
+
+  // Spawn a floating heart every so often, looping for as long as this screen is visible
+  const heartTimer = setInterval(() => {
+    const h = document.createElement("span");
+    h.className = "rising-heart";
+    h.textContent = LOVE_HEART_EMOJIS[Math.floor(Math.random() * LOVE_HEART_EMOJIS.length)];
+    h.style.left = (10 + Math.random() * 80) + "%";
+    h.style.animationDuration = (2.6 + Math.random() * 1.4) + "s";
+    risingHearts.appendChild(h);
+    setTimeout(() => h.remove(), 4200);
+  }, 550);
 
   fileInput.addEventListener("change", (e) => {
     const file = e.target.files && e.target.files[0];
@@ -215,12 +229,13 @@ function renderVideo() {
 
     source.src = objectUrl;
     video.load();
+    animation.hidden = true;
     video.hidden = false;
-    empty.hidden = true;
     video.play().catch(() => {});
   });
 
   $(node, "next").addEventListener("click", () => {
+    clearInterval(heartTimer);
     if (objectUrl) URL.revokeObjectURL(objectUrl);
     go("letter");
   });

@@ -127,18 +127,25 @@
       <p class="animate-rise hint" style="animation-delay:.15s" data-role="caption"></p>
 
       <div class="animate-rise video-wrap" style="animation-delay:.25s">
+        <div class="love-animation" data-role="animation">
+          <span class="love-sparkle love-sparkle-a animate-twinkle">✦</span>
+          <span class="love-sparkle love-sparkle-b animate-twinkle" style="animation-delay:.6s">✧</span>
+          <span class="love-sparkle love-sparkle-c animate-twinkle" style="animation-delay:.3s">✦</span>
+          <div class="love-hearts-rise" data-role="rising-hearts"></div>
+          <div class="love-scene">
+            <img src="Img/penguin-party.png" alt="Penguin" class="love-penguin animate-float" />
+            <span class="love-big-heart animate-pulse">💕</span>
+            <img src="Img/penguin-gift.png" alt="Penguin" class="love-penguin animate-float" style="animation-delay:.6s" />
+          </div>
+        </div>
         <video data-role="video" controls playsinline poster="Img/flower.jpg" hidden>
           <source data-role="source" src="" type="video/mp4" />
           Your browser doesn't support video playback.
         </video>
-        <div class="video-empty" data-role="empty">
-          <span class="video-empty-icon">🎬</span>
-          <p class="hint">No video selected yet</p>
-        </div>
       </div>
 
       <label class="btn btn-dark video-upload-btn">
-        Choose a video
+        Use our own video instead
         <input type="file" accept="video/*" data-role="file-input" hidden />
       </label>
 
