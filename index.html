@@ -116,8 +116,22 @@
       </p>
       <br>
       <button class="animate-rise btn btn-accent big" data-role="next" style="animation-delay:.45s">
-        Read my letter 💌
+        Watch a little something 🎬
       </button>
+    </section>
+  </template>
+
+  <template id="tpl-video">
+    <section class="screen video-screen">
+      <h1 class="animate-rise font-hand title-huge">A Little Something to Watch</h1>
+      <p class="animate-rise hint" style="animation-delay:.15s" data-role="caption"></p>
+      <div class="animate-rise video-wrap" style="animation-delay:.25s">
+        <video data-role="video" controls playsinline poster="Img/flower.jpg">
+          <source src="Img/birthday-video.mp4" type="video/mp4" />
+          Your browser doesn't support video playback.
+        </video>
+      </div>
+      <button class="animate-rise btn btn-accent big" data-role="next" style="animation-delay:.4s">Read my letter 💌</button>
     </section>
   </template>
 

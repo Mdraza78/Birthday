@@ -21,6 +21,9 @@ const GIFTS = [
 
 const PHOTO = "Img/flower.jpg";
 
+const VIDEO_SRC = "Img/birthday-video.mp4";
+const VIDEO_CAPTION = "a little moment, just for you 🎬";
+
 /* ===== Router-ish ===== */
 const app = document.getElementById("app");
 
@@ -32,6 +35,7 @@ function go(screen) {
     case "cake": renderCake(); break;
     case "gifts": renderGifts(); break;
     case "memories": renderMemories(); break;
+    case "video": renderVideo(); break;
     case "letter": renderLetter(); break;
   }
 }
@@ -83,11 +87,17 @@ function renderLock() {
     key.addEventListener("click", () => enter(i));
     keypad.appendChild(key);
   }
+
+  // spacer keeps 0 centered on the last row
+  keypad.appendChild(document.createElement("div")).className = "keypad-spacer";
+
   const zero = document.createElement("button");
   zero.className = "keypad-key";
   zero.textContent = "0";
   zero.addEventListener("click", () => enter(0));
   keypad.appendChild(zero);
+
+  keypad.appendChild(document.createElement("div")).className = "keypad-spacer";
 
   function updateDots() {
     dots.querySelectorAll(".dot").forEach((d, i) => {
@@ -182,6 +192,17 @@ function renderMemories() {
     fig.innerHTML = `<img src="${m.src}" alt="${m.caption}"/><figcaption>${m.caption}</figcaption>`;
     strip.appendChild(fig);
   });
+  $(node, "next").addEventListener("click", () => go("video"));
+  app.appendChild(node);
+}
+
+/* ===== Video ===== */
+function renderVideo() {
+  const node = tpl("tpl-video");
+  const video = $(node, "video");
+  video.querySelector("source").src = VIDEO_SRC;
+  video.load();
+  $(node, "caption").textContent = VIDEO_CAPTION;
   $(node, "next").addEventListener("click", () => go("letter"));
   app.appendChild(node);
 }
