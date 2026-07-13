@@ -210,39 +210,50 @@ function renderVideo() {
   const source = $(node, "source");
   const fileInput = $(node, "file-input");
   let objectUrl = null;
+  let heartTimer = null;
+  let petalTimer = null;
+  let fallbackActive = false;
 
-  // Scattered twinkling background stars
-  for (let i = 0; i < 14; i++) {
-    const s = document.createElement("span");
-    s.className = "star-dot";
-    s.textContent = "✦";
-    s.style.top = Math.random() * 100 + "%";
-    s.style.left = Math.random() * 100 + "%";
-    s.style.animationDelay = (Math.random() * 2.4) + "s";
-    stars.appendChild(s);
+  function startFallbackAnimation() {
+    if (fallbackActive) return;
+    fallbackActive = true;
+    video.hidden = true;
+    animation.hidden = false;
+
+    for (let i = 0; i < 14; i++) {
+      const s = document.createElement("span");
+      s.className = "star-dot";
+      s.textContent = "✦";
+      s.style.top = Math.random() * 100 + "%";
+      s.style.left = Math.random() * 100 + "%";
+      s.style.animationDelay = (Math.random() * 2.4) + "s";
+      stars.appendChild(s);
+    }
+
+    heartTimer = setInterval(() => {
+      const h = document.createElement("span");
+      h.className = "rising-heart";
+      h.textContent = LOVE_HEART_EMOJIS[Math.floor(Math.random() * LOVE_HEART_EMOJIS.length)];
+      h.style.left = (10 + Math.random() * 80) + "%";
+      h.style.animationDuration = (2.6 + Math.random() * 1.4) + "s";
+      risingHearts.appendChild(h);
+      setTimeout(() => h.remove(), 4200);
+    }, 550);
+
+    petalTimer = setInterval(() => {
+      const p = document.createElement("span");
+      p.className = "falling-petal";
+      p.textContent = PETAL_EMOJIS[Math.floor(Math.random() * PETAL_EMOJIS.length)];
+      p.style.left = Math.random() * 100 + "%";
+      p.style.animationDuration = (3.5 + Math.random() * 2) + "s";
+      petals.appendChild(p);
+      setTimeout(() => p.remove(), 6000);
+    }, 450);
   }
 
-  // Floating hearts
-  const heartTimer = setInterval(() => {
-    const h = document.createElement("span");
-    h.className = "rising-heart";
-    h.textContent = LOVE_HEART_EMOJIS[Math.floor(Math.random() * LOVE_HEART_EMOJIS.length)];
-    h.style.left = (10 + Math.random() * 80) + "%";
-    h.style.animationDuration = (2.6 + Math.random() * 1.4) + "s";
-    risingHearts.appendChild(h);
-    setTimeout(() => h.remove(), 4200);
-  }, 550);
-
-  // Falling cherry blossom petals
-  const petalTimer = setInterval(() => {
-    const p = document.createElement("span");
-    p.className = "falling-petal";
-    p.textContent = PETAL_EMOJIS[Math.floor(Math.random() * PETAL_EMOJIS.length)];
-    p.style.left = Math.random() * 100 + "%";
-    p.style.animationDuration = (3.5 + Math.random() * 2) + "s";
-    petals.appendChild(p);
-    setTimeout(() => p.remove(), 6000);
-  }, 450);
+  // If Img/video.mp4 is missing or fails to load, fall back to the animated scene
+  video.addEventListener("error", startFallbackAnimation);
+  source.addEventListener("error", startFallbackAnimation);
 
   fileInput.addEventListener("change", (e) => {
     const file = e.target.files && e.target.files[0];
@@ -251,16 +262,20 @@ function renderVideo() {
     if (objectUrl) URL.revokeObjectURL(objectUrl);
     objectUrl = URL.createObjectURL(file);
 
+    if (heartTimer) clearInterval(heartTimer);
+    if (petalTimer) clearInterval(petalTimer);
+    fallbackActive = false;
+    animation.hidden = true;
+
     source.src = objectUrl;
     video.load();
-    animation.hidden = true;
     video.hidden = false;
     video.play().catch(() => {});
   });
 
   $(node, "next").addEventListener("click", () => {
-    clearInterval(heartTimer);
-    clearInterval(petalTimer);
+    if (heartTimer) clearInterval(heartTimer);
+    if (petalTimer) clearInterval(petalTimer);
     if (objectUrl) URL.revokeObjectURL(objectUrl);
     go("letter");
   });

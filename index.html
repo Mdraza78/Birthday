@@ -127,7 +127,7 @@
       <p class="animate-rise hint" style="animation-delay:.15s" data-role="caption"></p>
 
       <div class="animate-rise video-wrap" style="animation-delay:.25s">
-        <div class="love-animation" data-role="animation">
+        <div class="love-animation" data-role="animation" hidden>
           <div class="love-stars" data-role="stars"></div>
           <div class="love-hearts-rise" data-role="rising-hearts"></div>
           <div class="love-petals" data-role="petals"></div>
@@ -190,14 +190,14 @@
             <span class="love-big-heart animate-pulse">💕</span>
           </div>
         </div>
-        <video data-role="video" controls playsinline poster="Img/flower.jpg" hidden>
-          <source data-role="source" src="" type="video/mp4" />
+        <video data-role="video" controls playsinline poster="Img/flower.jpg">
+          <source data-role="source" src="Img/video.mp4" type="video/mp4" />
           Your browser doesn't support video playback.
         </video>
       </div>
 
       <label class="btn btn-dark video-upload-btn">
-        Use our own video instead
+        Choose a different video
         <input type="file" accept="video/*" data-role="file-input" hidden />
       </label>
 
