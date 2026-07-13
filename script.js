@@ -19,7 +19,7 @@ const GIFTS = [
   { emoji: "☕", message: "Slow mornings and coffee dates, always." },
 ];
 
-const PHOTO = "Img/us.jpg";
+const PHOTO = "Img/flower.jpg";
 
 /* ===== Router-ish ===== */
 const app = document.getElementById("app");
