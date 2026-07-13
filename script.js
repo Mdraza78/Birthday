@@ -140,21 +140,21 @@ function renderGifts() {
   nextBtn.addEventListener("click", () => go("memories"));
   app.appendChild(node);
 }
-/* ====== Memories ====== */
 function renderMemories() {
   const node = tpl("tpl-memories");
   const strip = $(node, "strip");
-  const all = [...MEMORIES, ...MEMORIES];
-  all.forEach((m) => {
+  MEMORIES.forEach((m, i) => {
+    const tilt = m.tilt ?? (i % 2 === 0 ? -4 : 3);
     const fig = document.createElement("figure");
     fig.className = "polaroid";
-    fig.style.transform = `rotate(${m.tilt}deg)`;
+    fig.style.transform = `rotate(${tilt}deg)`;
     fig.innerHTML = `<img src="${m.src}" alt="${m.caption}" /><figcaption>${m.caption}</figcaption>`;
     strip.appendChild(fig);
   });
   $(node, "next").addEventListener("click", () => go("letter"));
   app.appendChild(node);
 }
+
 /* ====== Letter ====== */
 function renderLetter() {
   const node = tpl("tpl-letter");

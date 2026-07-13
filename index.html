@@ -78,16 +78,45 @@
       <button class="animate-pop btn btn-accent big" data-role="next" hidden>One more thing →</button>
     </section>
   </template>
-  <template id="tpl-memories">
-    <section class="screen memories-screen">
-      <h1 class="animate-rise font-hand title-huge">Moments I cherish with you</h1>
-      <div class="marquee-wrap">
-        <div class="animate-marquee marquee" data-role="strip"></div>
+<template id="tpl-memories">
+  <section class="screen memories-screen">
+    <div class="animate-rise memory-board">
+      <!-- decorative doodles -->
+      <span class="doodle star star-1">✦</span>
+      <span class="doodle star star-2">✧</span>
+      <span class="doodle star star-3">✦</span>
+      <span class="doodle star star-4">✧</span>
+      <span class="doodle heart heart-1">♡</span>
+      <span class="doodle heart heart-2">♡</span>
+      <span class="doodle heart heart-3">♡</span>
+      <span class="doodle swirl swirl-1">✿</span>
+      <span class="doodle swirl swirl-2">❀</span>
+      <span class="doodle forever font-hand">forever ✨</span>
+      <span class="doodle love font-hand">love ♡</span>
+
+      <!-- string across the top -->
+      <div class="string"></div>
+
+      <!-- polaroids clipped to string -->
+      <div class="clothesline" data-role="strip"></div>
+
+      <!-- white cloud bottom with title -->
+      <div class="cloud">
+        <span class="cloud-star cloud-star-l">★</span>
+        <span class="cloud-star cloud-star-r">★</span>
+        <h1 class="font-hand cloud-title">Moments I Cherish With You</h1>
       </div>
-      <p class="animate-rise hint" style="animation-delay:.3s">every little moment with you is my favorite one 💗</p>
-      <button class="animate-rise btn btn-accent big" data-role="next" style="animation-delay:.45s">Read my letter 💌</button>
-    </section>
-  </template>
+    </div>
+
+    <p class="animate-rise hint" style="animation-delay:.3s">
+      every little moment with you is my favorite one 💗
+    </p>
+    <button class="animate-rise btn btn-accent big" data-role="next" style="animation-delay:.45s">
+      Read my letter 💌
+    </button>
+  </section>
+</template>
+
   <template id="tpl-letter">
     <section class="screen letter-screen">
       <div data-role="closed">
