@@ -1,17 +1,17 @@
 const PASSCODE = "1207";
 const HINT = "Hint: your birthday (DDMM) 💗";
 const NAME = "Cutie";
-const LOCK_PHOTO = "assets/memory-4.jpg";
+const LOCK_PHOTO = "Img/memory-4.jpg";
 const GIFTS = [
   { emoji: "💌", message: "I want to annoy you for the rest of your life 🐧" },
   { emoji: "🌸", message: "You make ordinary days feel like celebrations" },
   { emoji: "⭐", message: "May this year be full of little wins & warm moments" },
 ];
 const MEMORIES = [
-  { src: "assets/memory-1.jpg", caption: "golden hours ☁️", tilt: -4 },
-  { src: "assets/memory-2.jpg", caption: "sweetest days 🍦", tilt: 3 },
-  { src: "assets/memory-3.jpg", caption: "party mode 🎈", tilt: -2 },
-  { src: "assets/memory-4.jpg", caption: "you & flowers 🌷", tilt: 4 },
+  { src: "Img/memory-1.jpg", caption: "golden hours ☁️", tilt: -4 },
+  { src: "Img/memory-2.jpg", caption: "sweetest days 🍦", tilt: 3 },
+  { src: "Img/memory-3.jpg", caption: "party mode 🎈", tilt: -2 },
+  { src: "Img/memory-4.jpg", caption: "you & flowers 🌷", tilt: 4 },
 ];
 const CONFETTI_COLORS = ["#f8b4c4", "#ffd97d", "#a8d8ea", "#ff8fa3", "#fff1c9"];
 /* ====== State machine ====== */
@@ -124,7 +124,7 @@ function renderGifts() {
     btn.className = "gift-btn animate-float";
     btn.style.animationDelay = i * 0.4 + "s";
     btn.setAttribute("aria-label", `Open gift ${i + 1}`);
-    btn.innerHTML = `<img src="assets/penguin-gift.png" alt="Penguin holding a gift" class="gift-img" />`;
+    btn.innerHTML = `<img src="Img/penguin-gift.png" alt="Penguin holding a gift" class="gift-img" />`;
     btn.addEventListener("click", () => {
       opened[i] = true;
       cell.innerHTML = `
