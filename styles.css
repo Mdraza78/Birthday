@@ -147,11 +147,9 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
   position: relative;
   width: min(92vw, 780px);
   aspect-ratio: 4 / 3;
-  background: linear-gradient(160deg, #8a2438 0%, #6b1d2e 55%, #4e1322 100%);
-  border-radius: 14px;
-  box-shadow: 0 30px 60px -20px rgba(0,0,0,.6), inset 0 0 60px rgba(0,0,0,.35);
   overflow: hidden;
   padding: 2.2rem 1.5rem 0;
+  /* box removed */
 }
 
 /* String stretched across the top */
