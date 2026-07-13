@@ -6,9 +6,9 @@ const HINT = "The day we became us 🗝️";
 const GREETING = "It's your special day! 🎉";
 
 const MEMORIES = [
-  { src: "Img/memory1.jpg", caption: "golden hours ☁️", tilt: -5 },
-  { src: "Img/memory2.jpg", caption: "sweetest days 🍦", tilt: 3 },
-  { src: "Img/memory3.jpg", caption: "party mode 🎈", tilt: -2 },
+  { src: "Img/memor-y1.jpg", caption: "golden hours ☁️", tilt: -5 },
+  { src: "Img/memory-2.jpg", caption: "sweetest days 🍦", tilt: 3 },
+  { src: "Img/memory-3.jpg", caption: "party mode 🎈", tilt: -2 },
   { src: "Img/memory4.jpg", caption: "you & flowers 🌷", tilt: 4 },
 ];
 
