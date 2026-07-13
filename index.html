@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>A Birthday Surprise For You 🎂🐧</title>
-<meta name="description" content="A penguin-themed interactive birthday surprise — enter the passcode, make a wish, open gifts and read a heartfelt letter." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Birthday Surprise For You 🎂🐧</title>
+  <meta name="description" content="A penguin-themed interactive birthday surprise — enter the passcode, make a wish, open gifts and read a heartfelt letter." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <!-- SVG heart clip (used by lock screen photo) -->
@@ -20,6 +20,7 @@
     </defs>
   </svg>
   <main id="app"></main>
+
   <!-- Templates for each screen -->
   <template id="tpl-lock">
     <section class="screen lock-screen">
@@ -45,6 +46,7 @@
       </div>
     </section>
   </template>
+
   <template id="tpl-wrong">
     <section class="screen wrong-screen">
       <h1 class="animate-pop font-hand title-huge">Wrong Passcode</h1>
@@ -52,88 +54,90 @@
       <button class="animate-stamp btn-try" data-role="retry" style="animation-delay:.4s">TRY AGAIN</button>
     </section>
   </template>
+
   <template id="tpl-cake">
     <section class="screen cake-screen">
       <p class="animate-rise font-hand cake-greet" data-role="greet"></p>
       <h1 class="animate-rise font-hand title-huge" style="animation-delay:.15s">Make a Wish</h1>
-      <p class="animate-rise hint" data-role="cake-hint" style="animation-delay:.3s">Tap the cake to blow out the candles</p>
-      <button class="cake-btn" data-role="cake-btn" aria-label="Blow out the candles">
-        <div class="flames" data-role="flames">
-          <span class="animate-flame">🔥</span>
-          <span class="animate-flame" style="animation-delay:.2s">🔥</span>
-          <span class="animate-flame" style="animation-delay:.4s">🔥</span>
-        </div>
-        <img src="Img/cake.png" alt="Birthday cake with candles" class="cake-img animate-float" data-role="cake-img" />
-      </button>
-      <div class="animate-pop cake-next" data-role="next-wrap" hidden>
-        <img src="Img/penguin-party.png" alt="Celebrating penguin" class="animate-wiggle small-penguin" />
-        <button class="btn btn-accent big" data-role="next">Next surprise →</button>
+      <p class="animate-rise hint" style="animation-delay:.25s">Tap the flame to blow out the candles 🕯️</p>
+      <div class="animate-rise cake-btn" style="animation-delay:.35s">
+        <div class="flames" data-role="flames">🔥🔥🔥</div>
+        <img src="Img/cake.png" alt="Birthday cake with candles" class="animate-float cake-img" data-role="cake-img" />
+      </div>
+      <p class="hint cake-hint" data-role="cake-hint"></p>
+      <div class="cake-next" data-role="next-wrap" hidden>
+        <img src="Img/penguin-happy.png" alt="Happy penguin" class="animate-pop small-penguin" />
+        <button class="btn btn-accent big" data-role="next">Open gifts 🎁</button>
       </div>
     </section>
   </template>
+
   <template id="tpl-gifts">
     <section class="screen gifts-screen">
-      <h1 class="animate-rise font-hand title-huge">Click on gifts to open</h1>
-      <div class="gifts" data-role="gifts"></div>
-      <button class="animate-pop btn btn-accent big" data-role="next" hidden>One more thing →</button>
+      <h1 class="animate-rise font-hand title-huge">Picked Just For You</h1>
+      <p class="animate-rise hint" style="animation-delay:.15s">Tap each penguin to unwrap a little gift ✨</p>
+      <div class="animate-rise gifts" data-role="gifts" style="animation-delay:.25s"></div>
+      <button class="animate-rise btn btn-accent big" data-role="next" hidden style="animation-delay:.45s">See our memories 📸</button>
     </section>
   </template>
-<template id="tpl-memories">
-  <section class="screen memories-screen">
-    <div class="animate-rise memory-board">
-      <!-- decorative doodles -->
-      <span class="doodle star star-1">✦</span>
-      <span class="doodle star star-2">✧</span>
-      <span class="doodle star star-3">✦</span>
-      <span class="doodle star star-4">✧</span>
-      <span class="doodle heart heart-1">♡</span>
-      <span class="doodle heart heart-2">♡</span>
-      <span class="doodle heart heart-3">♡</span>
-      <span class="doodle swirl swirl-1">✿</span>
-      <span class="doodle swirl swirl-2">❀</span>
-      <span class="doodle forever font-hand">forever ✨</span>
-      <span class="doodle love font-hand">love ♡</span>
 
-      <!-- string across the top -->
-      <div class="string"></div>
+  <template id="tpl-memories">
+    <section class="screen memories-screen">
+      <div class="memory-board">
+        <!-- decorative doodles -->
+        <span class="doodle star star-1 animate-twinkle">✦</span>
+        <span class="doodle star star-2 animate-twinkle" style="animation-delay:.4s">✧</span>
+        <span class="doodle star star-3 animate-twinkle" style="animation-delay:.8s">✦</span>
+        <span class="doodle star star-4 animate-twinkle" style="animation-delay:.2s">✧</span>
+        <span class="doodle heart heart-1 animate-pulse">♡</span>
+        <span class="doodle heart heart-2 animate-pulse" style="animation-delay:.6s">♡</span>
+        <span class="doodle heart heart-3 animate-pulse" style="animation-delay:.3s">♡</span>
+        <span class="doodle swirl swirl-1 animate-twinkle">✿</span>
+        <span class="doodle swirl swirl-2 animate-twinkle" style="animation-delay:.5s">❀</span>
+        <span class="doodle forever font-hand animate-float">forever ✨</span>
+        <span class="doodle love font-hand animate-float" style="animation-delay:.8s">love ♡</span>
 
-      <!-- polaroids clipped to string -->
-      <div class="clothesline" data-role="strip"></div>
+        <!-- string across the top -->
+        <div class="string"></div>
 
-      <!-- white cloud bottom with title -->
-      <div class="cloud">
-        <span class="cloud-star cloud-star-l">★</span>
-        <span class="cloud-star cloud-star-r">★</span>
-        <h1 class="font-hand cloud-title">Moments I Cherish With You</h1>
+        <!-- polaroids clipped to string -->
+        <div class="clothesline" data-role="strip"></div>
+
+        <!-- white cloud bottom with title -->
+        <div class="cloud animate-rise">
+          <span class="cloud-star cloud-star-l animate-twinkle">★</span>
+          <span class="cloud-star cloud-star-r animate-twinkle" style="animation-delay:.6s">★</span>
+          <h1 class="font-hand cloud-title">Moments I Cherish With You</h1>
+        </div>
       </div>
-    </div>
 
-    <p class="animate-rise hint" style="animation-delay:.3s">
-      every little moment with you is my favorite one 💗
-    </p>
-    <button class="animate-rise btn btn-accent big" data-role="next" style="animation-delay:.45s">
-      Read my letter 💌
-    </button>
-  </section>
-</template>
+      <p class="animate-rise hint" style="animation-delay:.3s">
+        every little moment with you is my favorite one 💗
+      </p>
+      <button class="animate-rise btn btn-accent big" data-role="next" style="animation-delay:.45s">
+        Read my letter 💌
+      </button>
+    </section>
+  </template>
 
   <template id="tpl-letter">
     <section class="screen letter-screen">
-      <div data-role="closed">
-        <h1 class="animate-rise font-hand title-huge">To the one I adore</h1>
-        <button class="animate-float envelope" data-role="open" aria-label="Open the letter">💌</button>
-        <p class="animate-rise hint">tap to open</p>
+      <div class="animate-rise closed" data-role="closed">
+        <p class="hint">A letter is waiting for you…</p>
+        <div class="envelope" role="button" tabindex="0" data-role="open" aria-label="Open letter">💌</div>
+        <p class="hint">Tap the envelope to open it</p>
       </div>
-      <div class="animate-pop letter-card" data-role="opened" hidden>
-        <img src="Img/penguin-party.png" alt="Party penguin" class="letter-penguin animate-wiggle" />
-        <p class="font-hand letter-hi">Dear <span data-role="name"></span>,</p>
-        <p class="font-hand letter-body">
-          Happy birthday! 🎂 Today is all about you — the laughs, the late-night talks, the way you
-          make everything brighter. May this year be full of little wins, warm conversations, and
-          moments that remind you just how loved you are.
-        </p>
-        <p class="font-hand letter-body">Forever yours,</p>
-        <p class="font-hand letter-sign">— your penguin 🐧</p>
+      <div class="animate-rise opened" data-role="opened" hidden>
+        <div class="letter-card">
+          <img src="Img/penguin-love.png" alt="Penguin holding a heart" class="letter-penguin" />
+          <p class="letter-hi font-hand">Hi <span data-role="name"></span> 👋</p>
+          <p class="letter-body font-hand">
+            Happy birthday to the person who makes every ordinary day feel like a celebration.
+            I’m so lucky to have you, and I can’t wait to make a million more memories together.
+            You are my favorite notification, my calmest thought, and my happiest reason.
+          </p>
+          <p class="letter-sign font-hand">All my love, always ♡</p>
+        </div>
         <div class="love-wrap">
           <div class="hearts" data-role="hearts"></div>
           <button class="btn btn-primary big" data-role="love">Send love 💗</button>
@@ -141,6 +145,7 @@
       </div>
     </section>
   </template>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -141,27 +141,32 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
 .gift-msg { font-family: var(--font-hand); font-size: 1.5rem; margin-top: .5rem; line-height: 1.25; }
 
 /* ===== Memories ===== */
-.memories-screen { gap: 2rem; }
+.memories-screen {
+  gap: 0;
+  padding: 0;
+  justify-content: flex-start;
+}
 
 .memory-board {
   position: relative;
-  width: min(92vw, 780px);
-  aspect-ratio: 4 / 3;
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--berry);
   overflow: hidden;
-  padding: 2.2rem 1.5rem 0;
-  /* box removed */
+  padding: 2rem 0 0;
+  /* no box: no border-radius, no box-shadow */
 }
 
-/* String stretched across the top */
+/* String stretched across the full width */
 .string {
   position: absolute;
-  top: 22%;
-  left: 4%;
-  right: 4%;
+  top: 18%;
+  left: 0;
+  right: 0;
   height: 2px;
   background: rgba(255,240,220,.55);
   border-radius: 2px;
-  transform: rotate(-1.2deg);
+  transform: rotate(-1deg);
   transform-origin: left center;
   box-shadow: 0 1px 0 rgba(0,0,0,.25);
 }
@@ -170,10 +175,10 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
 .clothesline {
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: flex-start;
   gap: clamp(.4rem, 1.4vw, 1.2rem);
-  padding-top: 1.2rem;
+  padding: 1.2rem 1rem 0;
   z-index: 2;
 }
 .clothesline .polaroid {
@@ -182,6 +187,8 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
   border-radius: 3px;
   box-shadow: 0 10px 22px -8px rgba(0,0,0,.55);
   position: relative;
+  animation: sway 3.5s ease-in-out infinite;
+  transform-origin: top center;
 }
 .clothesline .polaroid::before {
   content: "";
@@ -203,8 +210,8 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
   transform: translateX(-50%) rotate(-4deg);
 }
 .clothesline .polaroid img {
-  width: clamp(90px, 14vw, 150px);
-  height: clamp(90px, 14vw, 150px);
+  width: clamp(90px, 18vw, 180px);
+  height: clamp(90px, 18vw, 180px);
   object-fit: cover;
 }
 .clothesline .polaroid figcaption {
@@ -278,7 +285,7 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
   position: relative;
   z-index: 2;
   color: #6b2436;
-  font-size: clamp(1.4rem, 3.4vw, 2.4rem);
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
   transform: rotate(-3deg);
   padding: 0 1.5rem;
   text-shadow: 0 1px 0 rgba(0,0,0,.05);
@@ -292,11 +299,17 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
 .cloud-star-l { left: 14%; top: 40%; }
 .cloud-star-r { right: 14%; top: 40%; transform: rotate(15deg); }
 
+.memories-screen .hint {
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+}
+
 /* Old marquee no longer used, kept hidden */
 .marquee-wrap { display: none; }
 
 /* ===== Letter ===== */
-.envelope { font-size: 6rem; transition: transform .2s ease; }
+.letter-screen { gap: 2rem; }
+.envelope { font-size: 6rem; transition: transform .2s ease; cursor: pointer; }
 .envelope:hover { transform: scale(1.1); }
 .letter-card {
   position: relative; width: 100%; max-width: 28rem;
@@ -332,6 +345,8 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
 @keyframes heart-float { 0%{transform:translateY(0) scale(.6);opacity:0;} 20%{opacity:1;} 100%{transform:translateY(-120px) scale(1.2);opacity:0;} }
 @keyframes stamp { 0%{transform:scale(2.4) rotate(-18deg);opacity:0;} 100%{transform:scale(1) rotate(-8deg);opacity:1;} }
 @keyframes twinkle { 0%,100%{opacity:.25;transform:scale(.8);} 50%{opacity:1;transform:scale(1.15);} }
+@keyframes pulse-soft { 0%,100%{opacity:.7;transform:scale(1);} 50%{opacity:1;transform:scale(1.2);} }
+@keyframes sway { 0%,100%{transform:rotate(-2deg);} 50%{transform:rotate(2deg);} }
 @keyframes marquee { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
 .animate-float { animation: float-y 3s ease-in-out infinite; }
 .animate-wiggle { animation: wiggle 2s ease-in-out infinite; }
@@ -341,4 +356,6 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
 .animate-rise { animation: rise-in .6s ease-out both; }
 .animate-stamp { animation: stamp .4s cubic-bezier(.34,1.56,.64,1) both; }
 .animate-twinkle { animation: twinkle 2.2s ease-in-out infinite; }
+.animate-pulse { animation: pulse-soft 2.4s ease-in-out infinite; }
+.animate-sway { animation: sway 3.5s ease-in-out infinite; }
 .animate-marquee { animation: marquee 30s linear infinite; }

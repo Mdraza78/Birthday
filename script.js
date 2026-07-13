@@ -1,102 +1,129 @@
-const PASSCODE = "1207";
-const HINT = "Hint: your birthday (DDMM) 💗";
-const NAME = "Cutie";
-const LOCK_PHOTO = "Img/flower.jpg";
-const GIFTS = [
-  { emoji: "💌", message: "I want to annoy you for the rest of your life 🐧" },
-  { emoji: "🌸", message: "You make ordinary days feel like celebrations" },
-  { emoji: "⭐", message: "May this year be full of little wins & warm moments" },
-];
+/* ===== Config ===== */
+const PASSCODE = "0618"; // change to a meaningful date
+const NAME = "My Love";    // change to their name
+
+const HINT = "The day we became us 🗝️";
+const GREETING = "It's your special day! 🎉";
+
 const MEMORIES = [
-  { src: "Img/memory-1.jpg", caption: "golden hours ☁️", tilt: -4 },
-  { src: "Img/memory-2.jpg", caption: "sweetest days 🍦", tilt: 3 },
-  { src: "Img/memory-3.jpg", caption: "party mode 🎈", tilt: -2 },
-  { src: "Img/memory-4.jpg", caption: "you & flowers 🌷", tilt: 4 },
+  { src: "Img/memory1.jpg", caption: "golden hours ☁️", tilt: -5 },
+  { src: "Img/memory2.jpg", caption: "sweetest days 🍦", tilt: 3 },
+  { src: "Img/memory3.jpg", caption: "party mode 🎈", tilt: -2 },
+  { src: "Img/memory4.jpg", caption: "you & flowers 🌷", tilt: 4 },
 ];
-const CONFETTI_COLORS = ["#f8b4c4", "#ffd97d", "#a8d8ea", "#ff8fa3", "#fff1c9"];
-/* ====== State machine ====== */
+
+const GIFTS = [
+  { emoji: "🧸", message: "A lifetime of hugs, whenever you need them." },
+  { emoji: "🌙", message: "Every night ends with you in my thoughts." },
+  { emoji: "✈️", message: "Adventures with you are my favorite kind." },
+  { emoji: "☕", message: "Slow mornings and coffee dates, always." },
+];
+
+const PHOTO = "Img/us.jpg";
+
+/* ===== Router-ish ===== */
 const app = document.getElementById("app");
-const stages = { lock: renderLock, wrong: renderWrong, cake: renderCake, gifts: renderGifts, memories: renderMemories, letter: renderLetter };
-function go(stage) {
+
+function go(screen) {
   app.innerHTML = "";
-  // remove any leftover confetti from previous screens
-  document.querySelectorAll(".confetti-piece").forEach((n) => n.remove());
-  stages[stage]();
-}
-function tpl(id) { return document.getElementById(id).content.firstElementChild.cloneNode(true); }
-function $(root, sel) { return root.querySelector(`[data-role="${sel}"]`); }
-/* ====== Confetti ====== */
-function spawnConfetti(count = 40) {
-  for (let i = 0; i < count; i++) {
-    const s = document.createElement("span");
-    s.className = "confetti-piece";
-    const size = 6 + Math.random() * 8;
-    const round = Math.random() > 0.5;
-    s.style.left = Math.random() * 100 + "vw";
-    s.style.width = size + "px";
-    s.style.height = size * (round ? 1 : 0.5) + "px";
-    s.style.backgroundColor = CONFETTI_COLORS[i % CONFETTI_COLORS.length];
-    s.style.borderRadius = round ? "50%" : "2px";
-    s.style.animationDelay = Math.random() * 3 + "s";
-    s.style.animationDuration = 3 + Math.random() * 3 + "s";
-    document.body.appendChild(s);
+  switch (screen) {
+    case "lock": renderLock(); break;
+    case "wrong": renderWrong(); break;
+    case "cake": renderCake(); break;
+    case "gifts": renderGifts(); break;
+    case "memories": renderMemories(); break;
+    case "letter": renderLetter(); break;
   }
 }
-/* ====== Lock ====== */
+
+/* ===== Helpers ===== */
+function tpl(id) {
+  return document.getElementById(id).content.cloneNode(true);
+}
+function $(root, role) {
+  return root.querySelector(`[data-role="${role}"]`);
+}
+function spawnConfetti(count = 30) {
+  const colors = ["#f2c94c", "#d94a6b", "#f4c8d1", "#fbf5e9", "#6b2436"];
+  for (let i = 0; i < count; i++) {
+    const piece = document.createElement("div");
+    piece.className = "confetti-piece";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.width = (6 + Math.random() * 8) + "px";
+    piece.style.height = (10 + Math.random() * 12) + "px";
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+    piece.style.animationDuration = (2 + Math.random() * 3) + "s";
+    piece.style.animationDelay = Math.random() * 1 + "s";
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 6000);
+  }
+}
+
+/* ===== Lock ===== */
 function renderLock() {
   const node = tpl("tpl-lock");
-  $(node, "photo").src = LOCK_PHOTO;
+  $(node, "photo").src = PHOTO;
   $(node, "hint").textContent = HINT;
   const dots = $(node, "dots");
   const keypad = $(node, "keypad");
-  const keypadWrap = $(node, "keypad-wrap");
-  let entered = "";
-  function drawDots() {
-    dots.innerHTML = "";
-    for (let i = 0; i < PASSCODE.length; i++) {
-      const d = document.createElement("div");
-      d.className = "dot";
-      d.textContent = entered[i] ? "✱" : "";
-      dots.appendChild(d);
+  let input = "";
+
+  for (let i = 0; i < 4; i++) {
+    const dot = document.createElement("div");
+    dot.className = "dot";
+    dot.dataset.index = i;
+    dots.appendChild(dot);
+  }
+
+  for (let i = 1; i <= 9; i++) {
+    const key = document.createElement("button");
+    key.className = "keypad-key";
+    key.textContent = i;
+    key.addEventListener("click", () => enter(i));
+    keypad.appendChild(key);
+  }
+  const zero = document.createElement("button");
+  zero.className = "keypad-key";
+  zero.textContent = "0";
+  zero.addEventListener("click", () => enter(0));
+  keypad.appendChild(zero);
+
+  function updateDots() {
+    dots.querySelectorAll(".dot").forEach((d, i) => {
+      d.textContent = i < input.length ? "●" : "";
+    });
+  }
+  function enter(n) {
+    if (input.length < 4) {
+      input += n;
+      updateDots();
+    }
+    if (input.length === 4) {
+      setTimeout(check, 200);
     }
   }
-  drawDots();
-  ["1","2","3","4","5","6","7","8","9","*","0","#"].forEach((k) => {
-    const b = document.createElement("button");
-    b.className = "keypad-key";
-    b.textContent = k;
-    b.setAttribute("aria-label", "Key " + k);
-    b.addEventListener("click", () => {
-      if (entered.length < PASSCODE.length) { entered += k; drawDots(); }
-    });
-    keypad.appendChild(b);
-  });
-  $(node, "clear").addEventListener("click", () => { entered = ""; drawDots(); });
-  $(node, "unlock").addEventListener("click", () => {
-    if (entered === PASSCODE) {
-      go("cake");
-    } else {
-      keypadWrap.classList.add("animate-shake");
-      setTimeout(() => {
-        keypadWrap.classList.remove("animate-shake");
-        entered = "";
-        go("wrong");
-      }, 550);
-    }
-  });
+  function check() {
+    if (input === PASSCODE) go("cake");
+    else go("wrong");
+  }
+  $(node, "clear").addEventListener("click", () => { input = ""; updateDots(); });
+  $(node, "unlock").addEventListener("click", check);
   app.appendChild(node);
 }
-/* ====== Wrong ====== */
+
+/* ===== Wrong ===== */
 function renderWrong() {
   const node = tpl("tpl-wrong");
   $(node, "retry").addEventListener("click", () => go("lock"));
   app.appendChild(node);
 }
-/* ====== Cake ====== */
+
+/* ===== Cake ===== */
 function renderCake() {
   const node = tpl("tpl-cake");
-  $(node, "greet").textContent = `Happy Birthday, ${NAME}! 🎂`;
-  const btn = $(node, "cake-btn");
+  $(node, "greet").textContent = GREETING;
+  const btn = $(node, "cake-img");
   const flames = $(node, "flames");
   const img = $(node, "cake-img");
   const hint = $(node, "cake-hint");
@@ -111,7 +138,8 @@ function renderCake() {
   app.appendChild(node);
   spawnConfetti(40);
 }
-/* ====== Gifts ====== */
+
+/* ===== Gifts ===== */
 function renderGifts() {
   const node = tpl("tpl-gifts");
   const wrap = $(node, "gifts");
@@ -140,6 +168,8 @@ function renderGifts() {
   nextBtn.addEventListener("click", () => go("memories"));
   app.appendChild(node);
 }
+
+/* ===== Memories ===== */
 function renderMemories() {
   const node = tpl("tpl-memories");
   const strip = $(node, "strip");
@@ -148,14 +178,15 @@ function renderMemories() {
     const fig = document.createElement("figure");
     fig.className = "polaroid";
     fig.style.transform = `rotate(${tilt}deg)`;
-    fig.innerHTML = `<img src="${m.src}" alt="${m.caption}" /><figcaption>${m.caption}</figcaption>`;
+    fig.style.animationDelay = `${i * 0.25}s`;
+    fig.innerHTML = `<img src="${m.src}" alt="${m.caption}"/><figcaption>${m.caption}</figcaption>`;
     strip.appendChild(fig);
   });
   $(node, "next").addEventListener("click", () => go("letter"));
   app.appendChild(node);
 }
 
-/* ====== Letter ====== */
+/* ===== Letter ===== */
 function renderLetter() {
   const node = tpl("tpl-letter");
   const closed = $(node, "closed");
@@ -177,5 +208,6 @@ function renderLetter() {
   });
   app.appendChild(node);
 }
-/* ====== Boot ====== */
+
+/* ===== Boot ===== */
 go("lock");
