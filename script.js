@@ -139,7 +139,6 @@ function renderCake() {
   const nextWrap = $(node, "next-wrap");
   btn.addEventListener("click", () => {
     flames.style.display = "none";
-    img.classList.remove("animate-float");
     hint.textContent = "Yay! Your wish is on its way ✨";
     nextWrap.hidden = false;
   }, { once: true });
@@ -204,12 +203,24 @@ function renderVideo() {
   $(node, "caption").textContent = VIDEO_CAPTION;
 
   const animation = $(node, "animation");
+  const stars = $(node, "stars");
   const risingHearts = $(node, "rising-hearts");
   const petals = $(node, "petals");
   const video = $(node, "video");
   const source = $(node, "source");
   const fileInput = $(node, "file-input");
   let objectUrl = null;
+
+  // Scattered twinkling background stars
+  for (let i = 0; i < 14; i++) {
+    const s = document.createElement("span");
+    s.className = "star-dot";
+    s.textContent = "✦";
+    s.style.top = Math.random() * 100 + "%";
+    s.style.left = Math.random() * 100 + "%";
+    s.style.animationDelay = (Math.random() * 2.4) + "s";
+    stars.appendChild(s);
+  }
 
   // Floating hearts
   const heartTimer = setInterval(() => {

@@ -333,7 +333,9 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
   aspect-ratio: 16 / 9;
   border-radius: 1rem;
   overflow: hidden;
-  background: linear-gradient(160deg, rgba(217, 74, 107, .35), rgba(72, 24, 42, .75));
+  background: linear-gradient(135deg, #ff8fa8, #7a2b40, #2c1a3a, #3f6fa8);
+  background-size: 300% 300%;
+  animation: gradient-drift 10s ease-in-out infinite;
   box-shadow: var(--shadow-soft);
   display: flex;
   align-items: center;
@@ -347,26 +349,30 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
   justify-content: center;
 }
 .anime-couple {
-  width: 15rem;
+  width: 17rem;
   height: auto;
 }
-@media (min-width: 480px) { .anime-couple { width: 19rem; } }
-.anime-figure-a { animation: figure-sway 3.4s ease-in-out infinite; transform-origin: 140px 240px; }
-.anime-figure-b { animation: figure-sway 3.4s ease-in-out infinite; animation-delay: .5s; transform-origin: 272px 240px; }
+@media (min-width: 480px) { .anime-couple { width: 21rem; } }
+.anime-figure-a { animation: figure-sway 3.6s ease-in-out infinite; transform-origin: 168px 270px; }
+.anime-figure-b { animation: figure-sway 3.6s ease-in-out infinite; animation-delay: .4s; transform-origin: 286px 270px; }
+.heart-glow { animation: glow-pulse 2.4s ease-in-out infinite; transform-origin: 220px 118px; }
 .love-big-heart {
   position: absolute;
-  font-size: 2rem;
-  bottom: 34%;
+  font-size: 2.1rem;
+  top: 20%;
 }
-.love-sparkle {
+.love-stars {
   position: absolute;
-  font-size: 1.4rem;
-  color: var(--gold);
-  z-index: 1;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }
-.love-sparkle-a { top: 12%; left: 10%; }
-.love-sparkle-b { top: 18%; right: 12%; }
-.love-sparkle-c { bottom: 16%; left: 16%; }
+.love-stars .star-dot {
+  position: absolute;
+  color: rgba(255,255,255,.8);
+  font-size: .8rem;
+  animation: twinkle 2.4s ease-in-out infinite;
+}
 .love-hearts-rise {
   position: absolute;
   inset: 0;
@@ -391,9 +397,17 @@ button { font-family: inherit; border: none; cursor: pointer; background: none; 
   font-size: 1.1rem;
   animation: petal-fall linear forwards;
 }
+@keyframes gradient-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
 @keyframes figure-sway {
   0%, 100% { transform: rotate(-2deg) translateY(0); }
-  50% { transform: rotate(2deg) translateY(-4px); }
+  50% { transform: rotate(2deg) translateY(-5px); }
+}
+@keyframes glow-pulse {
+  0%, 100% { transform: scale(1); opacity: .7; }
+  50% { transform: scale(1.15); opacity: 1; }
 }
 @keyframes petal-fall {
   0% { transform: translateY(-10%) translateX(0) rotate(0deg); opacity: 0; }
