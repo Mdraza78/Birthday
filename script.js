@@ -1,7 +1,7 @@
 const PASSCODE = "1207";
 const HINT = "Hint: your birthday (DDMM) 💗";
 const NAME = "Cutie";
-const LOCK_PHOTO = "Img/memory-4.jpg";
+const LOCK_PHOTO = "Img/flower.jpg";
 const GIFTS = [
   { emoji: "💌", message: "I want to annoy you for the rest of your life 🐧" },
   { emoji: "🌸", message: "You make ordinary days feel like celebrations" },
