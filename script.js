@@ -1,5 +1,5 @@
 /* ===== Config ===== */
-const PASSCODE = "0618"; // change to a meaningful date
+const PASSCODE = "2003"; // change to a meaningful date
 const NAME = "My Love";    // change to their name
 
 const HINT = "The day we became us 🗝️";
