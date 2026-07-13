@@ -197,6 +197,7 @@ function renderMemories() {
 
 /* ===== Video ===== */
 const LOVE_HEART_EMOJIS = ["💗", "💕", "💖", "💓", "♡"];
+const PETAL_EMOJIS = ["🌸", "🌸", "✿"];
 
 function renderVideo() {
   const node = tpl("tpl-video");
@@ -204,12 +205,13 @@ function renderVideo() {
 
   const animation = $(node, "animation");
   const risingHearts = $(node, "rising-hearts");
+  const petals = $(node, "petals");
   const video = $(node, "video");
   const source = $(node, "source");
   const fileInput = $(node, "file-input");
   let objectUrl = null;
 
-  // Spawn a floating heart every so often, looping for as long as this screen is visible
+  // Floating hearts
   const heartTimer = setInterval(() => {
     const h = document.createElement("span");
     h.className = "rising-heart";
@@ -219,6 +221,17 @@ function renderVideo() {
     risingHearts.appendChild(h);
     setTimeout(() => h.remove(), 4200);
   }, 550);
+
+  // Falling cherry blossom petals
+  const petalTimer = setInterval(() => {
+    const p = document.createElement("span");
+    p.className = "falling-petal";
+    p.textContent = PETAL_EMOJIS[Math.floor(Math.random() * PETAL_EMOJIS.length)];
+    p.style.left = Math.random() * 100 + "%";
+    p.style.animationDuration = (3.5 + Math.random() * 2) + "s";
+    petals.appendChild(p);
+    setTimeout(() => p.remove(), 6000);
+  }, 450);
 
   fileInput.addEventListener("change", (e) => {
     const file = e.target.files && e.target.files[0];
@@ -236,6 +249,7 @@ function renderVideo() {
 
   $(node, "next").addEventListener("click", () => {
     clearInterval(heartTimer);
+    clearInterval(petalTimer);
     if (objectUrl) URL.revokeObjectURL(objectUrl);
     go("letter");
   });
