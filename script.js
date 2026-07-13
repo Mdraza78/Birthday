@@ -195,65 +195,20 @@ function renderMemories() {
 }
 
 /* ===== Video ===== */
-const LOVE_HEART_EMOJIS = ["💗", "💕", "💖", "💓", "♡"];
-const PETAL_EMOJIS = ["🌸", "🌸", "✿"];
-
 function renderVideo() {
   const node = tpl("tpl-video");
   $(node, "caption").textContent = VIDEO_CAPTION;
 
-  const animation = $(node, "animation");
-  const stars = $(node, "stars");
-  const risingHearts = $(node, "rising-hearts");
-  const petals = $(node, "petals");
   const video = $(node, "video");
   const source = $(node, "source");
   const fileInput = $(node, "file-input");
   let objectUrl = null;
-  let heartTimer = null;
-  let petalTimer = null;
-  let fallbackActive = false;
 
-  function startFallbackAnimation() {
-    if (fallbackActive) return;
-    fallbackActive = true;
-    video.hidden = true;
-    animation.hidden = false;
-
-    for (let i = 0; i < 14; i++) {
-      const s = document.createElement("span");
-      s.className = "star-dot";
-      s.textContent = "✦";
-      s.style.top = Math.random() * 100 + "%";
-      s.style.left = Math.random() * 100 + "%";
-      s.style.animationDelay = (Math.random() * 2.4) + "s";
-      stars.appendChild(s);
-    }
-
-    heartTimer = setInterval(() => {
-      const h = document.createElement("span");
-      h.className = "rising-heart";
-      h.textContent = LOVE_HEART_EMOJIS[Math.floor(Math.random() * LOVE_HEART_EMOJIS.length)];
-      h.style.left = (10 + Math.random() * 80) + "%";
-      h.style.animationDuration = (2.6 + Math.random() * 1.4) + "s";
-      risingHearts.appendChild(h);
-      setTimeout(() => h.remove(), 4200);
-    }, 550);
-
-    petalTimer = setInterval(() => {
-      const p = document.createElement("span");
-      p.className = "falling-petal";
-      p.textContent = PETAL_EMOJIS[Math.floor(Math.random() * PETAL_EMOJIS.length)];
-      p.style.left = Math.random() * 100 + "%";
-      p.style.animationDuration = (3.5 + Math.random() * 2) + "s";
-      petals.appendChild(p);
-      setTimeout(() => p.remove(), 6000);
-    }, 450);
-  }
-
-  // If Img/video.mp4 is missing or fails to load, fall back to the animated scene
-  video.addEventListener("error", startFallbackAnimation);
-  source.addEventListener("error", startFallbackAnimation);
+  // Try to autoplay with sound; if the browser blocks it, fall back to muted autoplay
+  video.play().catch(() => {
+    video.muted = true;
+    video.play().catch(() => {});
+  });
 
   fileInput.addEventListener("change", (e) => {
     const file = e.target.files && e.target.files[0];
@@ -262,20 +217,15 @@ function renderVideo() {
     if (objectUrl) URL.revokeObjectURL(objectUrl);
     objectUrl = URL.createObjectURL(file);
 
-    if (heartTimer) clearInterval(heartTimer);
-    if (petalTimer) clearInterval(petalTimer);
-    fallbackActive = false;
-    animation.hidden = true;
-
     source.src = objectUrl;
     video.load();
-    video.hidden = false;
-    video.play().catch(() => {});
+    video.play().catch(() => {
+      video.muted = true;
+      video.play().catch(() => {});
+    });
   });
 
   $(node, "next").addEventListener("click", () => {
-    if (heartTimer) clearInterval(heartTimer);
-    if (petalTimer) clearInterval(petalTimer);
     if (objectUrl) URL.revokeObjectURL(objectUrl);
     go("letter");
   });

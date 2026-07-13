@@ -127,70 +127,7 @@
       <p class="animate-rise hint" style="animation-delay:.15s" data-role="caption"></p>
 
       <div class="animate-rise video-wrap" style="animation-delay:.25s">
-        <div class="love-animation" data-role="animation" hidden>
-          <div class="love-stars" data-role="stars"></div>
-          <div class="love-hearts-rise" data-role="rising-hearts"></div>
-          <div class="love-petals" data-role="petals"></div>
-          <div class="love-scene">
-            <svg class="anime-couple" viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An original illustrated couple embracing">
-              <defs>
-                <radialGradient id="heartGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#ff8fa8" stop-opacity=".9"/>
-                  <stop offset="100%" stop-color="#ff8fa8" stop-opacity="0"/>
-                </radialGradient>
-                <linearGradient id="girlHair" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#7a2b40"/>
-                  <stop offset="100%" stop-color="#4f1826"/>
-                </linearGradient>
-                <linearGradient id="boyHair" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#3a4f78"/>
-                  <stop offset="100%" stop-color="#212e4a"/>
-                </linearGradient>
-              </defs>
-
-              <!-- ground shadow -->
-              <ellipse cx="220" cy="278" rx="92" ry="11" fill="rgba(0,0,0,.2)" />
-
-              <!-- glow behind heart -->
-              <circle cx="220" cy="118" r="70" fill="url(#heartGlow)" class="heart-glow" />
-
-              <!-- girl -->
-              <g class="anime-figure anime-figure-a">
-                <path d="M118,270 Q116,195 132,176 Q168,152 204,178 Q218,196 216,270 Q168,286 118,270 Z" fill="#f2c94c"/>
-                <path d="M204,178 Q228,190 236,206 Q242,218 232,222 Q222,210 214,198 Z" fill="#f2c94c"/>
-                <ellipse cx="90" cy="168" rx="19" ry="48" transform="rotate(-16 90 168)" fill="url(#girlHair)"/>
-                <circle cx="168" cy="126" r="44" fill="#ffe3c9"/>
-                <path d="M124,120 Q128,64 168,68 Q208,64 212,120 Q210,92 168,88 Q126,92 124,120 Z" fill="url(#girlHair)"/>
-                <circle cx="153" cy="129" r="5" fill="#3d1c26"/>
-                <circle cx="183" cy="129" r="5" fill="#3d1c26"/>
-                <circle cx="155" cy="127" r="1.6" fill="#fff"/>
-                <circle cx="185" cy="127" r="1.6" fill="#fff"/>
-                <ellipse cx="143" cy="141" rx="7.5" ry="5" fill="#ff9fb6" opacity=".6"/>
-                <ellipse cx="193" cy="141" rx="7.5" ry="5" fill="#ff9fb6" opacity=".6"/>
-                <path d="M156,148 Q168,155 180,148" stroke="#3d1c26" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-              </g>
-
-              <!-- boy -->
-              <g class="anime-figure anime-figure-b">
-                <path d="M236,270 Q234,195 250,176 Q286,152 322,178 Q336,196 334,270 Q286,286 236,270 Z" fill="#3f6fa8"/>
-                <path d="M236,178 Q212,190 204,206 Q198,218 208,222 Q218,210 226,198 Z" fill="#3f6fa8"/>
-                <circle cx="286" cy="126" r="44" fill="#ffdcbd"/>
-                <path d="M240,124 Q244,64 286,66 Q328,64 332,124 Q326,82 286,76 Q246,82 240,124 Z" fill="url(#boyHair)"/>
-                <path d="M254,100 L244,80" stroke="url(#boyHair)" stroke-width="9" stroke-linecap="round"/>
-                <path d="M318,100 L328,80" stroke="url(#boyHair)" stroke-width="9" stroke-linecap="round"/>
-                <circle cx="271" cy="132" r="5" fill="#2c1810"/>
-                <circle cx="301" cy="132" r="5" fill="#2c1810"/>
-                <circle cx="273" cy="130" r="1.6" fill="#fff"/>
-                <circle cx="303" cy="130" r="1.6" fill="#fff"/>
-                <ellipse cx="261" cy="145" rx="6.5" ry="4.5" fill="#ff9fb6" opacity=".5"/>
-                <ellipse cx="311" cy="145" rx="6.5" ry="4.5" fill="#ff9fb6" opacity=".5"/>
-                <path d="M274,151 Q286,157 298,151" stroke="#2c1810" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-              </g>
-            </svg>
-            <span class="love-big-heart animate-pulse">💕</span>
-          </div>
-        </div>
-        <video data-role="video" controls playsinline poster="Img/flower.jpg">
+        <video data-role="video" controls autoplay playsinline poster="Img/flower.jpg">
           <source data-role="source" src="Img/video.mp4" type="video/mp4" />
           Your browser doesn't support video playback.
         </video>
